@@ -22,7 +22,7 @@ public class dutTest  extends Thread {
 	}
 	private void dutRun(){
 		
-		
+		if (!sg.goNextStage()) System.out.println("To end!");
 		/*
 		if (!sg.goNextStage()) System.out.println("To end!");
 		increaseProgressBar();
