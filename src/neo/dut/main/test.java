@@ -10,8 +10,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
 public class test {
-	static int deviceSize = 2;
-	static int stagesize = 6;
+	static int deviceSize = 6;
+	static int stagesize = 4;
 	public static void main(String[] args) {
 		final test mainTest = new test();
 		final UI ui = new UI();
