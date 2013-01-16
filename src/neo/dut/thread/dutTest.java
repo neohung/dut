@@ -21,9 +21,8 @@ public class dutTest  extends Thread {
 	private void dutPreRun(){		
 	}
 	private void dutRun(){
-		
-		if (!sg.goNextStage()) System.out.println("To end!");
 		/*
+		if (!sg.goNextStage()) System.out.println("To end!");
 		if (!sg.goNextStage()) System.out.println("To end!");
 		increaseProgressBar();
 		if (!sg.goNextStage()) System.out.println("To end!");
