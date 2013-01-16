@@ -68,7 +68,6 @@ public class dutTest  extends Thread {
 	  
 	                        while ((lineB = br.readLine()) != null) {  
 	                            if (lineB != null) System.out.println(lineB);  
-	  
 	                        }  
 	                    } catch (IOException e) {  
 	                        e.printStackTrace();  
@@ -79,19 +78,22 @@ public class dutTest  extends Thread {
 	            new Thread() {  
 	                public void run() {  
 	                    BufferedReader br = new BufferedReader(new InputStreamReader(p.getErrorStream()));  
+	                    BufferedWriter buffOut = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
 	                    try {  
 	                        String lineB = null;  
 	  
 	                        while ((lineB = br.readLine()) != null) {  
 	                            if (lineB != null) System.out.println(lineB);  
-	  
+	                            if (lineB.contains("sudo")) {
+	                            	buffOut.write("000000\n");
+	                            	buffOut.flush();
+	                            }
 	                        }  
 	                    } catch (IOException e) {  
 	                        e.printStackTrace();  
 	                    }  
 	                }  
-	            }.start();
-	              
+	            }.start();  
 	            p.waitFor();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
@@ -111,7 +113,7 @@ public class dutTest  extends Thread {
             //p.waitFor();
  catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+			e.printStackTrace();
 			}
             
                     
