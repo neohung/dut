@@ -1,13 +1,21 @@
 package neo.dut.thread;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
 import neo.dut.UI.singleGroup;
 
 import org.eclipse.swt.widgets.Display;
 
 public class dutTest  extends Thread {
 	private singleGroup sg;
+	private String scriptName;
 	public dutTest(singleGroup sg) {
 		this.sg = sg;
+		this.scriptName = "./a.sh";
 	}
 	public void run() {
 		dutInit();
@@ -21,6 +29,7 @@ public class dutTest  extends Thread {
 	private void dutPreRun(){		
 	}
 	private void dutRun(){
+		runScriptFile();
 		/*
 		if (!sg.goNextStage()) System.out.println("To end!");
 		if (!sg.goNextStage()) System.out.println("To end!");
@@ -43,5 +52,39 @@ public class dutTest  extends Thread {
 				 sg.progressBar.setSelection(sg.progressBar.getSelection() + 100);
 			 }
 		 });	
+	}
+	private void runScriptFile(){
+		try {
+			Process p = Runtime.getRuntime().exec(this.scriptName);
+			//Process p = Runtime.getRuntime().exec();
+			BufferedWriter buffOut = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
+            BufferedReader buffIn = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            BufferedReader buffErrIn = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+            /*
+            //Pipe args
+            buffOut.write("/ \n");
+			buffOut.flush();
+			*/
+			//Grep message
+			String line = "";
+            while((line = buffIn.readLine()) != null){
+            	String err = "";
+            	if((err = buffErrIn.readLine()) != null) {
+            		if (err.contains("sudo:"))  {
+            			buffOut.write("000000");
+            			buffOut.newLine();
+            			buffOut.flush();
+            		}
+            		System.out.println(err);
+            	}
+                    System.out.println(line);
+            }
+            buffErrIn.close();
+            buffOut.close();
+            buffIn.close();
+           	} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 }
