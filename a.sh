@@ -5,4 +5,4 @@
 echo "start formation"
 #sudo mkfs -t ext4 /dev/sdd1
 #sudo mkfs.ntfs /dev/sdd1
-sudo -s ls
+sudo -S mkfs.ntfs /dev/sdd1
