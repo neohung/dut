@@ -85,7 +85,7 @@ public class dutTest  extends Thread {
 	                    try {  
 	                        String line = null;  
 	                        while ((line = stdErrInput.readLine()) != null) {  
-	                            if (line != null) System.out.println(line);  
+	                            if (line != null) System.out.println("Err:"+line);  
 	                            if (line.contains("sudo:")) {
 	                            	stdOutput.write(sudoPasswd);
 	                            	stdOutput.newLine();
