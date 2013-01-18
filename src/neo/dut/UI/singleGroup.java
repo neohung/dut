@@ -11,6 +11,7 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
+import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -94,6 +95,20 @@ public class singleGroup  extends Composite{
 		 failImageLabel.setImage(image);
 		 failImageLabel.setLayoutData(new GridData(imageWidth,50));
 		 failImageLabel.setVisible(false);
+		 //create statu bar
+		 Label statu = new Label(this, SWT.SINGLE);
+		 //Set Font Size
+		 Font statuFont = statu.getFont();
+		 FontData[] statuFontData = statuFont.getFontData();
+		 for (int i = 0; i < statuFontData.length; i++) {
+			 statuFontData[i].setHeight(10);
+		 }
+		 Font statuNewFont = new Font(c.getDisplay(), statuFontData);
+		 statu.setFont(statuNewFont);
+		 //Set Border Size  
+		 statu.setLayoutData(new GridData(10,12));
+		 statu.setText("This is test");
+			 
 	}
 	public void showPass(){
 		 Display.getDefault().asyncExec(new Runnable() {
